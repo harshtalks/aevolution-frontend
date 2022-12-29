@@ -13,7 +13,7 @@ const SuccessfulSign = () => {
 
   useEffect(() => {
     if (time === 0) {
-      router.reload();
+      router.push("/app");
     }
 
     // exit early when we reach 0
@@ -59,6 +59,9 @@ const SuccessfulSign = () => {
           variant="outlined"
           fullWidth
           sx={{ borderRadius: "4px", fontWeight: "500" }}
+          onClick={() => {
+            router.push("/app");
+          }}
         >
           Take me
         </Button>

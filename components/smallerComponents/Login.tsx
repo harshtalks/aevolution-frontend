@@ -80,7 +80,7 @@ const Login = () => {
       size="md"
       color="primary"
       onClick={() => {
-        signOut({});
+        signOut();
       }}
     >
       Logout

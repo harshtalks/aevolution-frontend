@@ -20,12 +20,15 @@ import { Provider } from "react-redux";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, goerli, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
+import { mainnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { rainbowTheme } from "../themes/rainbowTheme";
 
+// progress bar
+import NextNProgress from "nextjs-progressbar";
+
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, goerli],
+  [mainnet, goerli],
   [publicProvider()]
 );
 
@@ -56,6 +59,7 @@ const MyApp = (props: MyAppProps) => {
             <CacheProvider value={emotionCache}>
               <CssVarsProvider theme={lightTheme}>
                 <CssBaseline />
+                <NextNProgress color="#353535" />
                 <Component {...pageProps} />
               </CssVarsProvider>
             </CacheProvider>

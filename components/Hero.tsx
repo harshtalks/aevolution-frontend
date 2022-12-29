@@ -1,4 +1,4 @@
-import { Alert, Box, Typography } from "@mui/joy";
+import { Alert, Box, Button, Chip, Typography } from "@mui/joy";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import useUnsplash from "../hooks/useUnsplash";
@@ -7,9 +7,11 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Text from "./smallerComponents/Text";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Hero = () => {
   const { isLoading, result, error } = useUnsplash();
+  const router = useRouter();
 
   return (
     <Box
@@ -31,13 +33,56 @@ const Hero = () => {
         {isLoading ? (
           <Loader />
         ) : error === "" ? (
-          <Image
-            src={result.image}
-            alt="image from unsplash"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-          />
+          <Box
+            position={"relative"}
+            sx={{
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Image
+              src={result.image}
+              alt="image from unsplash"
+              fill
+              style={{ objectFit: "cover" }}
+              priority
+            />
+            <Box
+              position={"absolute"}
+              sx={{ zIndex: 1000, bottom: "10%", left: "5%" }}
+            >
+              <Typography
+                sx={{
+                  color: "#fff",
+                  fontWeight: "200",
+                  textTransform: "uppercase",
+                }}
+                level="body1"
+                gutterBottom
+              >
+                By
+              </Typography>
+              <Typography
+                level="h1"
+                gutterBottom
+                sx={{
+                  color: "#fff",
+                  fontWeight: "200",
+                  textTransform: "uppercase",
+                  letterSpacing: ".25rem",
+                }}
+              >
+                {result.name}
+              </Typography>
+              <Chip
+                sx={{ color: "white", borderRadius: "2px" }}
+                variant="outlined"
+                onClick={() => window.open(result.unsplash, "_blank")}
+              >
+                Visit Unsplash
+              </Chip>
+            </Box>
+          </Box>
         ) : (
           <Alert
             color="neutral"

@@ -3,6 +3,8 @@ import { Axios } from "axios";
 
 type UnsplashT = {
   image: string;
+  name: string;
+  unsplash: string;
 };
 
 const useUnsplash = () => {
@@ -25,7 +27,11 @@ const useUnsplash = () => {
         console.error(responseFromApi.errors[0]);
         throw new Error(responseFromApi.errors[0]);
       } else {
-        setResult({ image: responseFromApi.response.urls.regular });
+        setResult({
+          image: responseFromApi.response.urls.regular,
+          name: responseFromApi.response.user.name,
+          unsplash: responseFromApi.response.user.links.self,
+        });
         setLoading(false);
       }
     } catch (e: any) {

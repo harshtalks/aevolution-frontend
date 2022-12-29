@@ -3,12 +3,13 @@ import React from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmojiObjectsTwoToneIcon from "@mui/icons-material/EmojiObjectsTwoTone";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import Login from "./smallerComponents/Login";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import CloudCircleIcon from "@mui/icons-material/CloudCircle";
 
 const Header = () => {
+  const session = useSession();
   return (
     <Box
       sx={{
@@ -62,28 +63,42 @@ const Header = () => {
       >
         <Button
           variant="plain"
-          sx={{ fontWeight: "700" }}
+          sx={{ fontWeight: "500" }}
           endDecorator={<GitHubIcon fontSize="small" sx={{ mr: "0px" }} />}
         >
-          Github
+          github
         </Button>
         <Button
           variant="plain"
-          sx={{ fontWeight: "700" }}
+          sx={{ fontWeight: "500" }}
           endDecorator={<LinkedInIcon fontSize="small" sx={{ mr: "0px" }} />}
         >
-          Linkedin
+          linkedin
         </Button>
         <Login />
-        <Button
-          variant="outlined"
-          sx={{ fontWeight: "500" }}
-          size="md"
-          color="primary"
-          endDecorator={<GitHubIcon fontSize="small" sx={{ mr: "0px" }} />}
-        >
-          Backend
-        </Button>
+        {session.data?.user ? (
+          <Button
+            variant="outlined"
+            sx={{ fontWeight: "500" }}
+            size="md"
+            color="primary"
+            endDecorator={
+              <CloudCircleIcon fontSize="small" sx={{ mr: "0px" }} />
+            }
+          >
+            create an event
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            sx={{ fontWeight: "500" }}
+            size="md"
+            color="primary"
+            endDecorator={<GitHubIcon fontSize="small" sx={{ mr: "0px" }} />}
+          >
+            backend
+          </Button>
+        )}
         <Box
           sx={{
             "&:hover": {
