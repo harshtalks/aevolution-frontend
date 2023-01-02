@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/joy";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmojiObjectsTwoToneIcon from "@mui/icons-material/EmojiObjectsTwoTone";
@@ -7,9 +7,17 @@ import { signOut, useSession } from "next-auth/react";
 
 import Login from "./smallerComponents/Login";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const session = useSession();
+  const router = useRouter();
+  const [disable, setDisable] = useState(false);
+  useEffect(() => {
+    if (router.pathname === "/upload-ticket") {
+      setDisable(true);
+    }
+  }, []);
   return (
     <Box
       sx={{
@@ -85,6 +93,12 @@ const Header = () => {
             endDecorator={
               <CloudCircleIcon fontSize="small" sx={{ mr: "0px" }} />
             }
+            onClick={() => {
+              if (router.pathname !== "/upload-ticket") {
+                router.push("/upload-ticket");
+              }
+            }}
+            disabled={disable}
           >
             create an event
           </Button>

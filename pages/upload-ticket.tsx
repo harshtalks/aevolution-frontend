@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 import React from "react";
 import Layout from "../components/Layout";
 import Form from "../components/uploadPageComponents/Form";
+import useGetPosters from "../hooks/useGetPosters";
 
 const Upload = () => {
   return (

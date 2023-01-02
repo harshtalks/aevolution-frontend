@@ -2,8 +2,11 @@ import { Avatar, Box, Typography } from "@mui/joy";
 import { Stack } from "@mui/system";
 import React from "react";
 import Progress from "./Progress";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import { useAppSelector } from "../../ui/hooks";
 
 const Stepper = () => {
+  const progress = useAppSelector((state) => state.ui.progress);
   return (
     <Box>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -14,7 +17,7 @@ const Stepper = () => {
             variant="solid"
             size="sm"
           >
-            1
+            {progress > 1 ? <DoneAllIcon /> : 1}
           </Avatar>
           <Typography fontWeight={"bold"} level="body1">
             event details
@@ -27,7 +30,7 @@ const Stepper = () => {
             variant="solid"
             size="sm"
           >
-            2
+            {progress > 2 ? <DoneAllIcon /> : 2}
           </Avatar>
           <Typography fontWeight={"bold"} level="body1">
             contact information
@@ -40,7 +43,7 @@ const Stepper = () => {
             variant="solid"
             size="sm"
           >
-            3
+            {progress > 3 ? <DoneAllIcon /> : 3}
           </Avatar>
           <Typography fontWeight={"bold"} level="body1">
             ticket information

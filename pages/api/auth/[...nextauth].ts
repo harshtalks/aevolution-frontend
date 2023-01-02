@@ -60,6 +60,7 @@ export default async function auth(req: any, res: any) {
     providers,
     session: {
       strategy: "jwt",
+      maxAge: 24 * 60 * 60,
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {

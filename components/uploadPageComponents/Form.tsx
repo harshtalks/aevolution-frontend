@@ -4,9 +4,9 @@ import React from "react";
 import { useAppSelector } from "../../ui/hooks";
 import ContactDetails from "./Contact";
 import DemoTicket from "./DemoTicket";
-import EventTicketing from "./EventTicketing";
-import Stepper from "./Stepper";
 import TicketDetails from "./TicketDetails";
+import Stepper from "./Stepper";
+import EventDetails from "./EventDetails";
 
 const Form = () => {
   const progress = useAppSelector((state) => state.ui.progress);
@@ -32,7 +32,7 @@ const Form = () => {
         <Stepper />
         {progress === 1 && (
           <Box>
-            <TicketDetails />
+            <EventDetails />
           </Box>
         )}
 
@@ -44,7 +44,7 @@ const Form = () => {
 
         {progress === 3 && (
           <Box>
-            <EventTicketing />
+            <TicketDetails />
           </Box>
         )}
       </Box>

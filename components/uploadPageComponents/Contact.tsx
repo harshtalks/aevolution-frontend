@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../ui/hooks";
 import { toggleProgress } from "../../ui/reducers/uiReducer";
 import SocialLinks from "./SocialLinks";
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
 const ContactDetails = () => {
   const dispatch = useAppDispatch();
@@ -42,15 +44,33 @@ const ContactDetails = () => {
         sx={{ mb: 2, borderRadius: "4px" }}
         helperText="*please include country code"
       />
-      <Button
-        sx={{ fontWeight: "500", borderRadius: "4px" }}
-        variant="outlined"
-        onClick={() => {
-          dispatch(toggleProgress(3));
-        }}
-      >
-        next step
-      </Button>
+
+      <Stack direction={"row"} spacing={3}>
+        <Button
+          sx={{ fontWeight: "500", borderRadius: "4px" }}
+          variant="solid"
+          onClick={() => {
+            dispatch(toggleProgress(3));
+          }}
+          endDecorator={
+            <ArrowForwardOutlinedIcon fontSize="small" sx={{ mr: 0 }} />
+          }
+        >
+          Next Step
+        </Button>
+        <Button
+          startDecorator={
+            <ArrowBackOutlinedIcon fontSize="small" sx={{ ml: 0 }} />
+          }
+          sx={{ fontWeight: "500", borderRadius: "4px" }}
+          variant="outlined"
+          onClick={() => {
+            dispatch(toggleProgress(1));
+          }}
+        >
+          Previous Step
+        </Button>
+      </Stack>
     </Box>
   );
 };

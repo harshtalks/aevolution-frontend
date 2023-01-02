@@ -3,20 +3,25 @@ import Box from "@mui/joy/Box";
 import IconButton from "@mui/joy/IconButton";
 import Textarea from "@mui/joy/Textarea";
 import Typography from "@mui/joy/Typography";
+import { useAppDispatch, useAppSelector } from "../../ui/hooks";
+import { setDescription } from "../../ui/reducers/eventReducer";
 
 export default function Description() {
-  const [text, setText] = React.useState("");
-  const addEmoji = (emoji: string) => () => setText(`${text}${emoji} `);
+  const description = useAppSelector((state) => state.eventForm.description);
+  const dispatch = useAppDispatch();
+
+  const addEmoji = (emoji: string) => () =>
+    dispatch(setDescription(`${description}${emoji} `));
   return (
     <Textarea
       placeholder="type in here..."
       required
       size="sm"
-      value={text}
+      value={description}
       variant="soft"
-      onChange={(event) => setText(event.target.value)}
-      minRows={3}
-      maxRows={3}
+      onChange={(event) => dispatch(setDescription(event.target.value))}
+      minRows={5}
+      maxRows={5}
       startDecorator={
         <Box sx={{ display: "flex", gap: 0.5 }}>
           <IconButton
@@ -44,7 +49,7 @@ export default function Description() {
       }
       endDecorator={
         <Typography level="body3" sx={{ ml: "auto" }}>
-          {text.length} character(s)
+          {description.length} character(s)
         </Typography>
       }
       sx={{ minWidth: 300 }}

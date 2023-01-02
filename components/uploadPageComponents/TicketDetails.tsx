@@ -1,38 +1,36 @@
-import { Button, Input, TextField, Typography } from "@mui/joy";
-import { Box } from "@mui/system";
 import React from "react";
+import { Button, Input, Stack, TextField, Typography } from "@mui/joy";
+import { Box } from "@mui/system";
+import Terms from "./Terms";
 import { useAppDispatch } from "../../ui/hooks";
 import { toggleProgress } from "../../ui/reducers/uiReducer";
-import Description from "./Description";
 
-const TicketDetails = () => {
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
+
+const EventTicketing = () => {
   const dispatch = useAppDispatch();
   return (
     <Box sx={{ width: "60%" }}>
       <TextField
-        label="Event Name"
+        label="Ticket Price"
         placeholder="type in here..."
         variant="soft"
         required
         size="sm"
         id="event name"
         sx={{ mb: 2, borderRadius: "4px" }}
+        helperText="price should be in the ETH. It will be coverted for you in USD"
       />
       <TextField
-        label="Event Organizers"
+        label="Number of Tickets"
         placeholder="type in here..."
         variant="soft"
         required
+        type="number"
         size="sm"
         id="event name"
         sx={{ mb: 2, borderRadius: "4px" }}
       />
-      <Box sx={{ mb: 2 }}>
-        <Typography fontSize={"0.75em"} gutterBottom level="body2">
-          Event Description
-        </Typography>
-        <Description />
-      </Box>
       <TextField
         label="Event Address"
         placeholder="type in here..."
@@ -42,23 +40,26 @@ const TicketDetails = () => {
         id="event address"
         sx={{ mb: 2, borderRadius: "4px" }}
       />
-      <Box sx={{ mb: 2 }}>
-        <Typography fontSize={"0.75em"} gutterBottom level="body2">
-          Event Date
-        </Typography>
-        <Input required type={"date"} size="sm" variant="soft" />
-      </Box>
-      <Button
-        sx={{ fontWeight: "500", borderRadius: "4px" }}
-        variant="outlined"
-        onClick={() => {
-          dispatch(toggleProgress(2));
-        }}
-      >
-        next step
-      </Button>
+      <Terms />
+      <Stack direction={"row"} spacing={3}>
+        <Button sx={{ fontWeight: "500", borderRadius: "4px" }} variant="solid">
+          Proceed
+        </Button>
+        <Button
+          sx={{ fontWeight: "500", borderRadius: "4px" }}
+          variant="outlined"
+          onClick={() => {
+            dispatch(toggleProgress(2));
+          }}
+          startDecorator={
+            <ArrowBackOutlinedIcon fontSize="small" sx={{ ml: 0 }} />
+          }
+        >
+          Previous Step
+        </Button>
+      </Stack>
     </Box>
   );
 };
 
-export default TicketDetails;
+export default EventTicketing;

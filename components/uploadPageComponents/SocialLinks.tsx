@@ -2,7 +2,7 @@ import { Box, Card, Chip, Stack, TextField, Typography } from "@mui/joy";
 import React, { useState } from "react";
 
 const SocialLinks = () => {
-  const [socialLinksCount, setSocialLinksCount] = useState([] as number[]);
+  const [socialLinksCount, setSocialLinksCount] = useState([0] as number[]);
 
   return (
     <Card
@@ -22,7 +22,7 @@ const SocialLinks = () => {
         return (
           <Stack key={i} direction={"row"} spacing={2}>
             <TextField
-              label="Platform Name"
+              label="social media lpp"
               placeholder="type in here..."
               variant="soft"
               required
@@ -33,7 +33,7 @@ const SocialLinks = () => {
               helperText="name of the social media app"
             />
             <TextField
-              label="social media link"
+              label="link"
               placeholder="type in here..."
               variant="soft"
               required
