@@ -14,7 +14,7 @@ const handler = (request: NextApiRequest, response: NextApiResponse) => {
       fetch: nodeFetch.default as unknown as typeof fetch,
     });
 
-    unsplash.photos
+    return unsplash.photos
       .get({
         photoId: "IW5Bm4rB9OA",
       })

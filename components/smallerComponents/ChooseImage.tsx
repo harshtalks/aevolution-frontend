@@ -14,6 +14,7 @@ import Loader from "../Loader";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "../../ui/hooks";
 import { setPoster } from "../../ui/reducers/eventReducer";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 
 const ImageCard = () => {
   const [query, setQuery] = React.useState("");
@@ -144,12 +145,16 @@ const ImageCard = () => {
                     position: "relative",
                     opacity: image === el.image ? 0.5 : 1,
                     "&:hover": {
-                      opacity: 0.7,
+                      opacity: 0.5,
                       cursor: "pointer",
+                    },
+                    "&:focus": {
+                      opacity: 0.5,
                     },
                   }}
                   onClick={() => {
                     setImage(el.image);
+                    dispatch(setPoster(image));
                   }}
                 >
                   <Image
@@ -159,25 +164,23 @@ const ImageCard = () => {
                     alt="image"
                     style={{ objectFit: "cover" }}
                   />
+                  {image === el.image && (
+                    <CheckCircleOutlinedIcon
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%,-50%)",
+                        opacity: "unset",
+                      }}
+                      fontSize="large"
+                    />
+                  )}
                 </Box>
               );
             })
           )}
         </Box>
-      </Box>
-      <Box sx={{ display: "flex" }}>
-        <Button
-          variant="solid"
-          size="md"
-          color="primary"
-          sx={{ ml: "auto", fontWeight: 500 }}
-          disabled={image === "" || query === ""}
-          onClick={() => {
-            dispatch(setPoster(image));
-          }}
-        >
-          Select Image
-        </Button>
       </Box>
     </Card>
   );

@@ -16,7 +16,7 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
     fetch: nodeFetch.default as unknown as typeof fetch,
   });
 
-  unsplash.search
+  return unsplash.search
     .getPhotos({
       query: query as string,
       perPage: 30,
